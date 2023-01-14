@@ -1,0 +1,28 @@
+Attribute VB_Name = "Module1"
+Sub ChangeState()
+Attribute ChangeState.VB_ProcData.VB_Invoke_Func = "h\n14"
+'
+' ChangeState Macro
+'
+' Touche de raccourci du clavier: Ctrl+h
+'
+    
+'Change the state of the cell to inactive
+    ActiveCell.Value = "Inactive"
+'copy the row
+    Range(Selection, Selection.End(xlToRight)).Select
+    Application.CutCopyMode = False
+    Selection.Copy
+'Change the page
+    Sheets("Feuil2").Select
+    Range("A1").Select
+'Check where the content is going to be copied
+    If Selection.End(xlDown).Offset(1, 0) = "" Then
+        Selection.End(xlDown).Offset(1, 0).Select
+    Else
+        Selection.End(xlDown).End(xlDown).Offset(1, 0).Select
+    End If
+    
+    ActiveSheet.Paste
+    
+End Sub

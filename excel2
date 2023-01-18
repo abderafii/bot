@@ -1,0 +1,123 @@
+Sub Macro()
+'
+' Macro Macro
+'
+
+Dim str As String
+
+    ActiveCell.Value = "Inactive"
+
+    Selection.Offset(0, 1).Select
+    str = Selection.Value
+    Selection.Copy
+    
+    Sheets("Feuil2").Select
+    Range("A1").Select
+'Check where the content is going to be copied
+    If Selection.End(xlDown).Offset(1, 0) = "" Then
+        Selection.End(xlDown).Offset(1, 0).Select
+    Else
+        Selection.End(xlDown).End(xlDown).Offset(1, 0).Select
+    End If
+    
+    ActiveSheet.Paste
+
+Sheets("Feuil1").Select
+ Call Macro2
+Sheets("Feuil1").Select
+ Call Macro3
+Sheets("Feuil1").Select
+ Call Macro4
+Sheets("Feuil1").Select
+ Call Macro5
+ 
+Sheets("Feuil3").Select
+ Call Macro7(str)
+    
+End Sub
+
+Sub Macro2()
+'
+' Macro2 Macro
+'
+    Selection.Offset(0, 1).Select
+    Selection.Copy
+    
+    Sheets("Feuil2").Select
+    Range("A1").Select
+    
+    Selection.End(xlDown).End(xlDown).Select
+    
+    Selection.Offset(0, 2).Select
+    ActiveSheet.Paste
+    
+End Sub
+
+Sub Macro3()
+'
+' Macro3 Macro
+'
+
+    Selection.Offset(0, 1).Select
+    Selection.Copy
+    
+    Sheets("Feuil2").Select
+    Range("A1").Select
+
+    Selection.End(xlDown).End(xlDown).Select
+    
+    Selection.Offset(0, 4).Select
+    ActiveSheet.Paste
+    
+End Sub
+
+Sub Macro4()
+'
+' Macro4 Macro
+'
+
+    Selection.Offset(0, 1).Select
+    Selection.Copy
+    
+    Sheets("Feuil2").Select
+    Range("A1").Select
+
+    Selection.End(xlDown).End(xlDown).Select
+    
+    Selection.Offset(0, 5).Select
+    ActiveSheet.Paste
+    
+End Sub
+
+Sub Macro5()
+'
+' Macro5 Macro
+'
+
+    Selection.Offset(0, 1).Select
+    Selection.Copy
+    
+    Sheets("Feuil2").Select
+    Range("A1").Select
+
+    Selection.End(xlDown).End(xlDown).Select
+    
+    Selection.Offset(0, 7).Select
+    ActiveSheet.Paste
+    
+End Sub
+
+Sub Macro7(ByVal str As String)
+'
+' Macro7 Macro
+'
+
+Dim RowNumb As Variant
+Dim ws As Worksheet
+Set ws = Worksheets("Feuil3")
+
+    On Error Resume Next
+RowNumb = Application.WorksheetFunction.Match(str, ws.Range("A:A"), 0)
+Rows(RowNumb).EntireRow.Delete
+
+End Sub
